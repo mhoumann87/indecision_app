@@ -1,4 +1,4 @@
 # Indecision App
 ---
-### Web app to help you make a decisisoin
+### Web app to help you make a decision
 ---
