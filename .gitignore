@@ -114,3 +114,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+/public/scripts/bundle.js
+
+# Files for learning
+/src/person.js
+/src/utils.js

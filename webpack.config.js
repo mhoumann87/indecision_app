@@ -8,4 +8,14 @@ module.exports = {
     path: path.join(__dirname, 'public/scripts'),
     filename: 'bundle.js',
   },
+  module: {
+    // Setup Babel for webpack
+    rules: [
+      {
+        loader: 'babel-loader',
+        test: /\.js$/,
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };
