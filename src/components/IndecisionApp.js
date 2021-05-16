@@ -6,19 +6,36 @@ import Action from './Action';
 import Options from './Options';
 
 class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    subtitle: 'Put your life in the hands of a computer!',
+    options: [],
+  };
 
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
+  handleDeleteOptions = () => {
+    this.setState(() => ({ options: [] }));
+  };
 
-    this.state = {
-      subtitle: 'Put your life in the hands of a computer',
-      options: props.options,
-    };
-  }
+  handleDeleteOption = optionToRemove => {
+    this.setState(prev => ({
+      options: prev.options.filter(option => optionToRemove !== option),
+    }));
+  };
+
+  handlePick = () => {
+    const random = Math.floor(Math.random() * this.state.options.length);
+    alert(this.state.options[random]);
+  };
+
+  handleAddOption = option => {
+    if (!option) {
+      return 'Enter valid value to add item';
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'This option allready exist';
+    }
+
+    this.setState(prev => ({ options: prev.options.concat(option) }));
+  };
+
   // Life cycle methods, like render, fires automaticly
 
   // When the app first is started
@@ -42,31 +59,6 @@ class IndecisionApp extends React.Component {
     }
   }
 
-  handleDeleteOptions() {
-    this.setState(() => ({ options: [] }));
-  }
-
-  handleDeleteOption(optionToRemove) {
-    this.setState(prev => ({
-      options: prev.options.filter(option => optionToRemove !== option),
-    }));
-  }
-
-  handlePick() {
-    const random = Math.floor(Math.random() * this.state.options.length);
-    alert(this.state.options[random]);
-  }
-
-  handleAddOption(option) {
-    if (!option) {
-      return 'Enter valid value to add item';
-    } else if (this.state.options.indexOf(option) > -1) {
-      return 'This option allready exist';
-    }
-
-    this.setState(prev => ({ options: prev.options.concat(option) }));
-  }
-
   render() {
     return (
       <div className='app-box'>
@@ -88,9 +80,5 @@ class IndecisionApp extends React.Component {
     );
   }
 }
-
-IndecisionApp.defaultProps = {
-  options: [],
-};
 
 export default IndecisionApp;
