@@ -4,11 +4,13 @@ import Header from './Header';
 import Action from './Action';
 import Options from './Options';
 import AddOption from './AddOption';
+import OptionModal from './OptionModal';
 
 class IndesicionApp extends Component {
   state = {
     subtitle: 'Put your life in the hands of a computer',
     options: [],
+    selectedOption: undefined,
   };
 
   render() {
@@ -28,6 +30,8 @@ class IndesicionApp extends Component {
         />
 
         <AddOption handleAddOption={this.handleAddOption} />
+
+        <OptionModal selectedOption={this.setState.selectedOption} />
       </div>
     );
   }
@@ -79,7 +83,9 @@ class IndesicionApp extends Component {
 
   handlePick = () => {
     const random = Math.floor(Math.random() * this.state.options.length);
-    alert(this.state.options[random]);
+    const selectedOption = this.state.options[random];
+    this.setState(() => ({ selectedOption }));
+    console.log(this.state);
   };
 }
 
